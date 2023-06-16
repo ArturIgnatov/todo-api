@@ -1,0 +1,107 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type CategoryEntity {
+  created_at: DateTime!
+  id: ID!
+  name: String!
+  todos: [TodoEntity!]!
+  updated_at: DateTime!
+}
+
+input CreateCategoryInput {
+  name: String!
+}
+
+input CreateTodoInput {
+  category_id: ID!
+  title: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type DialogEntity {
+  created_at: DateTime!
+  id: ID!
+  name: String!
+  updated_at: DateTime!
+  user_id: ID!
+}
+
+type MessageEntity {
+  content: String!
+  created_at: DateTime!
+  dialog_id: ID!
+  id: ID!
+  role: MessageRole!
+  updated_at: DateTime!
+}
+
+"""Role for messages in dialog"""
+enum MessageRole {
+  """GPT role"""
+  ASSISTANT
+
+  """User role"""
+  USER
+}
+
+type Mutation {
+  createCategory(input: CreateCategoryInput!): CategoryEntity!
+  createTodo(input: CreateTodoInput!): TodoEntity!
+  removeCategory(id: ID!): RemoveCategoryPayload!
+  removeTodo(id: ID!): RemoveTodoPayload!
+  updateCategory(input: UpdateCategoryInput!): CategoryEntity!
+  updateTodo(input: UpdateTodoInput!): TodoEntity!
+}
+
+type Query {
+  categories: [CategoryEntity!]!
+  category(id: ID!): CategoryEntity!
+  message(id: String!): MessageEntity!
+  todo(id: ID!): TodoEntity!
+  todos: [TodoEntity!]!
+  user(id: ID!): UserEntity!
+  users: [UserEntity!]!
+}
+
+type RemoveCategoryPayload {
+  id: ID!
+}
+
+type RemoveTodoPayload {
+  id: ID!
+}
+
+type TodoEntity {
+  category: CategoryEntity!
+  category_id: String!
+  completed: Boolean!
+  created_at: DateTime!
+  id: ID!
+  title: String!
+  updated_at: DateTime!
+}
+
+input UpdateCategoryInput {
+  id: ID!
+  name: String!
+}
+
+input UpdateTodoInput {
+  completed: Boolean
+  id: ID!
+  title: String
+}
+
+type UserEntity {
+  created_at: DateTime!
+  dialogs: [DialogEntity!]!
+  id: ID!
+  login: String!
+  updated_at: DateTime!
+}
